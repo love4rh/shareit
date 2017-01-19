@@ -39,6 +39,9 @@ var R = {
         'typeNormal': '일반 텍스트',
         'typeUrl': '사이트 주소',
         'redirect': '전송된 사이트로 이동합니다.',
+        'copyOk': '클립보드에 복사하였습니다.',
+        'copyError': '클립보드에 복사할 수 없습니다.',
+        'notUrl': '사이트 주소 형태가 아닙니다.',
         'hour': '시간',
         'min': '분',
         'sec': '초'
@@ -71,6 +74,9 @@ var R = {
         'typeNormal': 'Normal Text',
         'typeUrl': 'URL',
         'redirect': 'Move to the web site received.',
+        'copyOk': 'The text copied to the clipboard.',
+        'copyError': 'Unable to copy the text to the clipboard.',
+        'notUrl': 'It is not a type of URL.',
         'hour': 'hour(s)',
         'min': 'minute(s)',
         'sec': 'second(s)'

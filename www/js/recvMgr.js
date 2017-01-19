@@ -35,12 +35,16 @@ var recvMgr = {
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('recvData') + '</div>'
       + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
       + '<textarea id="recvData" class="w3-input x-theme-textpanel" style="width:100%;" rows="3" disabled></textarea>'
-      + '<button class="w3-btn" style="margin: 16px 5px 0 5px; width: 40%;">' + R.text('actionCopy') + '</button>'
-      + '<button class="w3-btn" style="margin: 16px 5px 0 5px; width: 40%;">' + R.text('actionRedirect') + '</button>'
+      + '<button class="w3-btn x-btn-copy" style="margin: 16px 5px 0 5px; width: 40%;">' + R.text('actionCopy') + '</button>'
+      + '<button class="w3-btn x-btn-redirect" style="margin: 16px 5px 0 5px; width: 40%;">' + R.text('actionRedirect') + '</button>'
       + '</div></div>'
       ;
 
     this.board.html(hs);
+
+    this.board.find('.x-btn-copy').off('click').on('click', this.copyToClipboard);
+    this.board.find('.x-btn-redirect').off('click').on('click', this.redirectUrl);
+
     this.waitToReceive();
   },
 
@@ -134,5 +138,35 @@ var recvMgr = {
         recvMgr.doneToWait(R.text('error'));
       }
     );
+  },
+
+  copyToClipboard: function(event) {
+    var outDiv = $('#recvData');
+
+    // 선택하려는 텍스트가 disabled라면 선택이 되지 않음
+    outDiv.removeAttr('disabled');
+    outDiv.select();
+
+    try {
+      if( document.execCommand('copy') ) {
+        showToast(R.text('copyOk'));
+      } else {
+        showToast(R.text('copyError'));
+      }
+    } catch (err) {
+      showToast(R.text('copyError'));
+    }
+    outDiv.attr('disabled', true);
+  },
+
+  redirectUrl: function(event) {
+    var textUrl = $('#recvData').val();
+
+    if( isValidUrl(textUrl) ) {
+      showToast(R.text('redirect'));
+      setTimeout(function() { location.href = textUrl; }, 500);
+    } else {
+      showToast(R.text('notUrl'));
+    }
   }
 };
