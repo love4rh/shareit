@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>SHERIT</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+  <link rel="stylesheet" type="text/css" href="../www/css/w3-css.css">
+
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <link rel="stylesheet" type="text/css" href="../www/css/app.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="appMain">
+    <ul id="appHeader" class="w3-navbar w3-top w3-large x-theme-d4" style="height: 50px;">
+      <li class="w3-opennav w3-left"><a href="#"><i class="fa fa-arrow-left"></i></a>
+      </li>
+      <li class="w3-opennav"><span>Receive<span></span></span>
+      </li>
+    </ul>
+    <div id="appBody" class="x-theme-d3" style="position: relative; top: 50px;">
+
+      <div class="x-main-view" id="recvMgr">
+        <div class="w3-container">
+          <div class="x-theme-d1 x-tab-title x-tab-grad">인증코드</div>
+          <div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">
+            <div id="idcode" class="w3-border w3-white" style="height:200px; width:200px; padding:10px; margin:auto;">
+              <canvas width="180" height="180"></canvas>
+            </div>
+            <div id="idtext" class="x-text-grey"><span>QR 코드를 스캔하거나 </span><span class="w3-xlarge x-text-red">43931</span>를 입력하세요.</div>
+            <div id="idmsg" class="x-text-orange">유효시간: 4분 49초</div>
+          </div>
+        </div>
+
+        <div class="w3-container">
+          <div class="x-theme-d1 x-tab-title x-tab-grad">받은 데이터</div>
+          <div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">
+            <textarea id="outputArea" class="w3-input x-theme-textpanel" style="width:100%;" rows="3"></textarea>
+
+            <div class="w3-container">
+              <button class="w3-btn" style="margin: 16px 0 0 0;">Copy To Clipboard</button>
+              <button class="w3-btn" style="margin: 16px 0 0 0;">Explorer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

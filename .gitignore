@@ -1,3 +1,13 @@
+# User defined
+.classpath
+.project
+.settings/
+target/
+platforms/
+.vscode/
+backup/
+site-release/
+
 # Built application files
 *.apk
 *.ap_

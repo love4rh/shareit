@@ -1,0 +1,97 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+
+}
+
+textarea { resize: none; }
+
+.x-theme-l5 { color:#000; background-color:#f8f8f8; }
+.x-theme-l4 { color:#000; background-color:#e6e6e7; }
+.x-theme-l3 { color:#000; background-color:#cdcecf; }
+.x-theme-l2 { color:#000; background-color:#b4b5b7; }
+.x-theme-l1 { color:#fff; background-color:#9b9c9f; }
+.x-theme-d1 { color:#fff; background-color:#474d52; }
+.x-theme-d2 { color:#fff; background-color:#22252d; }
+.x-theme-d3 { color:#fff; background-color:#20272b; }
+.x-theme-d4 { color:#fff; background-color:#12191d; }
+.x-theme-d5 { color:#fff; background-color:#0e1419; }
+.x-theme-d6 { color:#fff; background-color:#000000; }
+
+#appMain {
+}
+
+#appHeader {
+}
+
+#appHeader li span {
+  display: block;
+  padding: 12px 10px;
+}
+
+#appBody {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.x-tab-title {
+  width: 190px;
+  text-align: left;
+  padding: 7px 10px;
+  margin-top: 16px;
+  border-radius: 10px 10px 0 0;
+}
+
+.x-tab-grad {
+  background: #3d3d3b;
+  background: -webkit-linear-gradient(#50514e, #3d3d3b);
+  background: -o-linear-gradient(#50514e, #3d3d3b);
+  background: -moz-linear-gradient(#50514e, #3d3d3b);
+  background: linear-gradient(#50514e, #3d3d3b);
+}
+
+.x-theme-panel {
+  background: #3d3d3b;
+  color: #fff;
+}
+
+.x-panel {
+  border-radius: 0 10px 10px 10px;
+  padding: 16px;
+}
+
+.x-theme-textpanel {
+  background: #272822;
+  color: #fff;
+}
+
+.x-text-purple { color: #c678bd; }
+.x-text-orange { color: #d19a56; }
+.x-text-grey   { color: #abb2bf; }
+.x-text-blue   { color: #4fafef; }
+.x-text-red    { color: #e06262; }
+.x-text-green  { color: #98c379; }
+
+.x-receive, .x-send {
+  margin: 12px 16px 4px 16px;
+}

@@ -1,0 +1,44 @@
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+body footer {
+  position: fixed;
+  overflow: hidden;
+}
+
+body footer div {
+  padding-top: 14px;
+}
+
+textarea {
+  resize: none;
+}
+
+.x-navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden
+}
+.x-navbar li {
+  float: left
+}
+.x-navbar li a,
+.x-navitem {
+  display: block;
+  padding: 8px 16px
+}
+.x-navbar a {
+  text-decoration: none!important;
+  -webkit-transition: background-color .3s, color .15s, box-shadow .3s, opacity 0.3s;
+  transition: background-color .3s, color .15s, box-shadow .3s, opacity 0.3s;
+}
+
+.x-input {
+  padding: 8px;
+  display: block;
+  border: none;
+  width: 100%;
+}
