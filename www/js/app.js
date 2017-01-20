@@ -40,6 +40,10 @@ var app = {
 
     var curUrl = location.href;
 
+    if( curUrl.indexOf('https') >= 0 ) {
+      hmUrl = 'wss://www.tool4.us:9697/hermes';
+    }
+
     if( curUrl.indexOf('/receive') > 0 ) {
       app.showPage(recvMgr);
     } else if( curUrl.indexOf('/send') > 0 ) {
