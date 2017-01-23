@@ -38,16 +38,26 @@ var app = {
 
     app.showPage(pageMain);
 
+    if( window.plugins && window.plugins.shareit ) {
+      window.plugins.shareit.getRecvText(function(data) {
+        window.plugins.shareit.clearText();
+        app._showNext(data['text']);
+      },
+      function(error) {
+        window.plugins.shareit.clearText();
+      });
+    } else {
+      app._showNext();
+    }
+  },
+
+  _showNext: function(recvText) {
     var curUrl = location.href;
 
-    if( curUrl.indexOf('https') >= 0 ) {
-      hmUrl = 'wss://www.tool4.us:9697/hermes';
-    }
-
-    if( curUrl.indexOf('/receive') > 0 ) {
+    if( curUrl.indexOf('/send') > 0 || isValid2(recvText) ) {
+      app.showPage(sendMgr, {'text':recvText});
+    } else if( curUrl.indexOf('/receive') > 0 ) {
       app.showPage(recvMgr);
-    } else if( curUrl.indexOf('/send') > 0 ) {
-      app.showPage(sendMgr);
     }
 
     app.adjustLayout();
@@ -74,7 +84,16 @@ var app = {
   },
 
   onResume: function(event) {
-    //
+    console.log('onResum');
+    if( window.plugins && window.plugins.shareit ) {
+      window.plugins.shareit.getRecvText(function(data) {
+        window.plugins.shareit.clearText();
+        app.showPage(sendMgr, {'text':data['text']});
+      },
+      function(error) {
+        window.plugins.shareit.clearText();
+      });
+    }
   },
 
   onBackKeyDown: function(event) {
@@ -106,11 +125,6 @@ var app = {
   },
 
   showPage: function(pageMrg, options) {
-    if( pageMrg == app.currentPageMgr ) {
-      console.log('already displayed: ' + pageMrg.getPageID());
-      return;
-    }
-
     var pageID = pageMrg.getPageID();
     var newMgr = app.pages[pageID];
 
@@ -122,18 +136,17 @@ var app = {
     app.switchHeader(newMgr);
     newMgr.onActivated(app.currentPageMgr, options);
 
-    if( app.currentPageMgr ) {
+    if( app.currentPageMgr && app.currentPageMgr != newMgr ) {
       app.currentPageMgr.onDeactivated(newMgr);
     }
 
     app.pageBoard.find('.x-main-view').hide();
     app.pageBoard.find('#' + pageID).show();
 
-    if( app.currentPageMgr ) {
+    if( app.currentPageMgr != newMgr ) {
       app.pageViewStack.push(app.currentPageMgr);
+      app.currentPageMgr = newMgr;
     }
-
-    app.currentPageMgr = newMgr;
   },
 
   switchHeader: function(pageMgr) {

@@ -17,12 +17,14 @@ var sendMgr = {
     var hs = '';
     var textSent = '';
 
-    if( options && options['data'] ) { textSent = options['data']; }
+    if( options && options['text'] ) { textSent = options['text']; }
+
+    console.log(options);
 
     hs += '<div class="w3-container w3-large">'
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('sentData') + '</div>'
       + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
-      + '<textarea id="dataSent" class="w3-input x-theme-textpanel" style="width:100%;" rows="3" val="' + textSent + '"></textarea>'
+      + '<textarea id="dataSent" class="w3-input x-theme-textpanel" style="width:100%;" rows="3" val=""></textarea>'
       + '<div class="w3-left" style="margin-top: 10px;">'
       + '<input class="w3-radio" type="radio" name="dataType" value="normal" checked>'
       + '<label class="w3-validate"> ' + R.text('typeNormal') + '</label><span>&nbsp;&nbsp;</span>'
@@ -34,16 +36,21 @@ var sendMgr = {
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('remoteID') + '</div>'
       + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
       + '<input id="authCode" type="number" class="w3-input x-theme-textpanel" style="width:100%;" placeholder="' + R.text('enterCode') + '">'
-      + '<button class="w3-btn w3-large" style="margin: 16px 5px 0 5px; width:40%;" onclick="sendMgr.sendData();">' + R.text('actionSend') + '</button>'
+      + '<button class="w3-btn w3-large" style="margin: 16px 5px 0 5px;" onclick="sendMgr.sendData();">' + R.text('actionSend') + '</button>'
       ;
 
     if( !isRunningOnBrowser() ) {
-      hs += '<button class="w3-btn" style="margin: 16px 5px 0 5px; width:40%;" onclick="sendMgr.scanCode();">' + R.text('actionScan') + '</button>';
+      hs += '<button class="w3-btn" style="margin: 16px 5px 0 5px;" onclick="sendMgr.scanCode();">' + R.text('actionScan') + '</button>';
     }
     hs += '</div></div>';
 
     this.board.html(hs);
     this.board.find('#dataSent').off('change').on('change', this.onDataChanged);
+
+    if( isValid2(textSent) ) {
+      console.log('set: ' + textSent);
+      this.board.find('#dataSent').val(textSent);
+    }
   },
 
   onDeactivated: function(activePage) {

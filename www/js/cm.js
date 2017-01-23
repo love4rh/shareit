@@ -1,8 +1,8 @@
 const cUnit = 'px';
 const footerHeight = 48;
 const headerHeight = 46;
-var hmUrl = 'ws://www.tool4.us:9696/hermes';
-//const hmUrl = 'ws://127.0.0.1:96967/hermes';
+var hmUrl = 'wss://www.tool4.us:9697/hermes';
+
 const remainLimit = 300;  // 5min
 
 var runningOnBrowser = true;

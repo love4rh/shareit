@@ -35,8 +35,8 @@ var recvMgr = {
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('recvData') + '</div>'
       + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
       + '<textarea id="recvData" class="w3-input x-theme-textpanel" style="width:100%;" rows="3" disabled></textarea>'
-      + '<button class="w3-btn x-btn-copy" style="margin: 16px 5px 0 5px; width: 40%;">' + R.text('actionCopy') + '</button>'
-      + '<button class="w3-btn x-btn-redirect" style="margin: 16px 5px 0 5px; width: 40%;">' + R.text('actionRedirect') + '</button>'
+      + '<button class="w3-btn x-btn-copy" style="margin: 16px 5px 0 5px;">' + R.text('actionCopy') + '</button>'
+      + '<button class="w3-btn x-btn-redirect" style="margin: 16px 5px 0 5px;">' + R.text('actionRedirect') + '</button>'
       + '</div></div>'
       ;
 

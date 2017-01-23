@@ -40,4 +40,6 @@ PC와 스마트폰 뿐만 아니라 웹브라우저를 실행할 수 있는 기�
 5. PC에서 받은 데이터를 확인하고 사용합니다.
 
 
-
+# License
+## Icon / Image
+https://www.iconfinder.com/webhostingmedia

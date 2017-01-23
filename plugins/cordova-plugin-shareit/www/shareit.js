@@ -1,21 +1,13 @@
 module.exports = {
-  setUserID: function(userID, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'Tool', 'setUserID', [userID]);
+  getRecvText: function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'ShareIt', 'getRecvText', []);
   },
 
-  addAlarmItem: function(scheduleID, calendarID, progTitle, channelName, timeLong, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'Tool', 'addAlarmItem', [scheduleID, calendarID, progTitle, channelName, timeLong]);
+  clearText: function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'ShareIt', 'clearText', []);
   },
 
-  removeAlarmItem: function(scheduleID, calendarID, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'Tool', 'removeAlarmItem', [scheduleID, calendarID]);
-  },
-
-  clearAll: function(successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'Tool', 'clearAll', []);
-  },
-
-  upgrade: function(apkFile, successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'Tool', 'upgrade', [apkFile]);
+  setRecvText: function(recvText, successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'ShareIt', 'setRecvText', [recvText]);
   }
 };

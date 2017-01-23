@@ -39,10 +39,10 @@
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="ShareIt" >
-        <param name="android-package" value="com.tool4us.shareit.Tool"/>
+        <param name="android-package" value="com.tool4us.shareit.ShareIt"/>
       </feature>
     </config-file>
-    <source-file src="src/android/Tool.java" target-dir="src/com/tool4us/shareit" />
+    <source-file src="src/android/ShareIt.java" target-dir="src/com/tool4us/shareit" />
   </platform>
 
 </plugin>
