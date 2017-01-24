@@ -22,8 +22,8 @@ var pageMain = {
     var hs = '<div class="w3-container w3-center" style="padding: 20px;">'
       + '<img id="titleImg" src="./img/title.png"></div>'
       + '<div class="w3-container w3-center">'
-      + '<button class="w3-btn-block w3-teal w3-round-xlarge w3-large w3-padding-medium x-receive" style="width:95%"><i class="fa fa-cloud-download"></i> ' + R.text('recvPage') + '</button>'
-      + '<button class="w3-btn-block w3-khaki w3-round-xlarge w3-large w3-padding-medium x-send" style="width:95%"><i class="fa fa-cloud-upload"></i> ' + R.text('sendPage') + '</button>'
+      + '<button class="w3-btn w3-teal w3-round-xlarge w3-large w3-padding-medium x-receive" style="width:95%; margin:12px auto;"><i class="fa fa-cloud-download"></i> ' + R.text('recvPage') + '</button>'
+      + '<button class="w3-btn w3-khaki w3-round-xlarge w3-large w3-padding-medium x-send" style="width:95%; margin:12px auto;"><i class="fa fa-cloud-upload"></i> ' + R.text('sendPage') + '</button>'
       + '</div>'
     ;
 
@@ -33,6 +33,8 @@ var pageMain = {
     pageMain.board.find('.x-send').off('click').on('click', function(){ app.showPage(sendMgr) });
 
     pageMain.displayed = true;
+
+    app.adjustLayout();
   },
 
   adjustLayout: function(w, h) {
