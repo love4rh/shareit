@@ -38,7 +38,11 @@ var app = {
 
     app.showPage(pageMain);
 
-    if( window.plugins && window.plugins.shareit ) {
+    $('#mm1').on('click', function(){ app.showPage(pageMain); }).html(R.text('appTitle'));
+    $('#mm2').on('click', function(){ app.showPage(recvMgr);  }).html(R.text('recvPage'));
+    $('#mm3').on('click', function(){ app.showPage(sendMgr);  }).html(R.text('sendPage'));
+
+    if( !isRunningOnBrowser() && window.plugins && window.plugins.shareit ) {
       window.plugins.shareit.getRecvText(function(data) {
         window.plugins.shareit.clearText();
         app._showNext(data['text']);
@@ -77,6 +81,12 @@ var app = {
     place(app.pageBoard.find('.x-main-view'), undefined, undefined, w, h - appHeaderHeight);
 
     app.pageBoard.css({'position':'relative', 'top':appHeaderHeight + cUnit});
+
+    for(var x in app.pages) {
+      if( app.pages[x].adjustLayout ) {
+        app.pages[x].adjustLayout(w, h);
+      }
+    }
   },
 
   onPause: function(event) {
@@ -143,10 +153,13 @@ var app = {
     app.pageBoard.find('.x-main-view').hide();
     app.pageBoard.find('#' + pageID).show();
 
-    if( app.currentPageMgr != newMgr ) {
-      app.pageViewStack.push(app.currentPageMgr);
-      app.currentPageMgr = newMgr;
+    if( app.currentPageMgr && app.currentPageMgr.isMainContent && app.currentPageMgr.isMainContent() ) {
+      if( app.pageViewStack.length <= 0 || app.pageViewStack[app.pageViewStack.length - 1] != app.currentPageMgr ) {
+        app.pageViewStack.push(app.currentPageMgr);
+      }
     }
+
+    app.currentPageMgr = newMgr;
   },
 
   switchHeader: function(pageMgr) {
