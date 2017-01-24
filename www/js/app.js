@@ -96,8 +96,10 @@ var app = {
   onResume: function(event) {
     if( !isRunningOnBrowser() && window.plugins && window.plugins.shareit ) {
       window.plugins.shareit.getRecvText(function(data) {
-        window.plugins.shareit.clearText();
-        app.showPage(sendMgr, {'text':data['text']});
+        if( isValid2(data['text']) ) {
+          window.plugins.shareit.clearText();
+          app.showPage(sendMgr, {'text':data['text']});
+        }
       },
       function(error) {
         window.plugins.shareit.clearText();
@@ -168,7 +170,7 @@ var app = {
       app.header.find('li:nth-child(1)').html('<a href="javascipt:void(0);"><i class="fa fa-arrow-left"></i></a>').off('click').on('click', app.clickMainMenu);
       app.mainMenuAsGoBack = true;
     } else {
-      app.header.find('li:nth-child(1)').html('<a href="javascipt:void(0);"><i class="fa fa-bars"></i></a>').off('click').on('click', app.clickMainMenu);
+      app.header.find('li:nth-child(1)').html('<img src="./img/logo.png" style="width:24px; height:24px; margin:13px 10px;">').off('click').on('click', app.clickMainMenu);
       app.mainMenuAsGoBack = false;
     }
 
