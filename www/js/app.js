@@ -94,8 +94,7 @@ var app = {
   },
 
   onResume: function(event) {
-    console.log('onResum');
-    if( window.plugins && window.plugins.shareit ) {
+    if( !isRunningOnBrowser() && window.plugins && window.plugins.shareit ) {
       window.plugins.shareit.getRecvText(function(data) {
         window.plugins.shareit.clearText();
         app.showPage(sendMgr, {'text':data['text']});
