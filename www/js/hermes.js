@@ -48,7 +48,6 @@ var Hermes = {
 
       case 'data':
         if( cbSuccess != undefined ) { cbSuccess(msg.value); }
-        hm.close();
         break;
       }
     };

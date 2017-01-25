@@ -54,6 +54,8 @@ var recvMgr = {
   },
 
   doneToWait: function(msg) {
+    Hermes.cleanUp();
+
     if( recvMgr.countdownTimer ) { clearInterval(recvMgr.countdownTimer); }
     recvMgr.countdownTimer = undefined;
 
