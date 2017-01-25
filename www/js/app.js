@@ -6,6 +6,7 @@ var app = {
   mainMenuAsGoBack: false,
   currentPageMgr: undefined,
   pageViewStack: [],
+  wannaExit: false,
 
   begin: function() {
     document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
@@ -78,7 +79,7 @@ var app = {
     place(app.appBoard, undefined, undefined, w, h);
     place(app.header, undefined, undefined, w, appHeaderHeight);
     place(app.pageBoard, undefined, undefined, w, h - appHeaderHeight);
-    place(app.pageBoard.find('.x-main-view'), undefined, undefined, w, h - appHeaderHeight);
+    // place(app.pageBoard.find('.x-main-view'), undefined, undefined, w, h - appHeaderHeight);
 
     app.pageBoard.css({'position':'relative', 'top':appHeaderHeight + cUnit});
 
@@ -108,7 +109,13 @@ var app = {
   },
 
   onBackKeyDown: function(event) {
-    app.goBack();
+    if( app.wannaExit ) { navigator.app.exitApp(); }
+
+    if( !app.goBack() ) {
+      app.wannaExit = true;
+      showToast(R.text('backExit'));
+      setTimeout(function() { app.wannaExit = false; }, 2900);
+    }
   },
 
   onMenuKeyDown: function(event) {
@@ -178,9 +185,11 @@ var app = {
   },
 
   goBack: function() {
-    if( app.pageViewStack.length < 1 ) { return; }
+    if( app.pageViewStack.length < 1 ) { return false; }
 
     app.showPage(app.pageViewStack.pop());
+
+    return true;
   }
 };
 

@@ -19,13 +19,21 @@ var pageMain = {
   onActivated: function(prevMgr, options) {
     if( pageMain.displayed ) { return; }
 
-    var hs = '<div class="w3-container w3-center" style="padding: 20px;">'
-      + '<img id="titleImg" src="./img/title.png"></div>'
-      + '<div class="w3-container w3-center">'
-      + '<button class="w3-btn w3-teal w3-round-xlarge w3-large w3-padding-medium x-receive" style="width:95%; margin:12px auto;"><i class="fa fa-cloud-download"></i> ' + R.text('recvPage') + '</button>'
-      + '<button class="w3-btn w3-khaki w3-round-xlarge w3-large w3-padding-medium x-send" style="width:95%; margin:12px auto;"><i class="fa fa-cloud-upload"></i> ' + R.text('sendPage') + '</button>'
+    var hs = '<div class="w3-container w3-center" style="margin-top: 24px;">'
+      + '<button class="w3-btn w3-teal w3-round-xlarge w3-large w3-padding-medium x-receive" style="width:100%; margin:12px auto;"><i class="fa fa-cloud-download"></i> ' + R.text('recvPage') + '</button>'
+      + '<button class="w3-btn w3-khaki w3-round-xlarge w3-large w3-padding-medium x-send" style="width:100%; margin:12px auto;"><i class="fa fa-cloud-upload"></i> ' + R.text('sendPage') + '</button>'
       + '</div>'
-    ;
+      + '<div class="w3-container w3-center" style="padding: 20px;">'
+      + '<table>'
+      + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/cellphone.png"></td>'
+      + '<td style="padding:5px; text-align:left;">' + R.text('explPhone') + '</td></tr>'
+      + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/pc.png"></td>'
+      + '<td style="padding:5px; text-align:left;">' + R.text('explPC') + '</td></tr>'
+      + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/tablet.png"></td>'
+      + '<td style="padding:5px; text-align:left;">' + R.text('explTablet') + '</td></tr>'
+      + '</table>'
+      + '</div>'
+      ;
 
     pageMain.board.html(hs);
 
