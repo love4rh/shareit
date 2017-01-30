@@ -100,3 +100,8 @@ textarea { resize: none; }
   width: 64px;
   height: 64px;
 }
+
+.x-url {
+  color: #c678bd;
+  text-decoration: underline;
+}

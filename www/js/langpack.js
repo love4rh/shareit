@@ -1,6 +1,11 @@
 var R = {
   locale: 'ko',
   langPack: {},
+  siteUrl: 'https://www.tool4.us',
+
+  _getUrl: function(surfix) {
+    return '<span class="x-url">' + R.siteUrl + (isValid2(surfix) ? surfix : '') + '</span>';
+  },
 
   setLocale: function(locale) {
     if( isValid2(locale) ) {
@@ -43,9 +48,9 @@ var R = {
         'copyOk': '클립보드에 복사하였습니다.',
         'copyError': '클립보드에 복사할 수 없습니다.',
         'notUrl': '사이트 주소 형태가 아닙니다.',
-        'explPhone': '스마트폰에서 데이터를 보내거나 받으려면, App을 실행하거나 https://www.tool4.us에 접속하세요.',
-        'explPC': 'TV나 PC에서 보내거나 받으려면 https://www.tool4.us에 접속하세요.',
-        'explTablet': '태플릿에서 데이터를 보내거나 받으려면, App을 실행하거나 https://www.tool4.us에 접속하세요.',
+        'explPhone': '스마트폰에서 데이터를 보내거나 받으려면, App을 실행하거나 ' +  R._getUrl() + '에 접속하세요.',
+        'explPC': 'TV나 PC에서 보내거나 받으려면 ' + R._getUrl() + '에 접속하세요.',
+        'explTablet': '태플릿에서 데이터를 보내거나 받으려면, App을 실행하거나 ' + R._getUrl() + '에 접속하세요.',
         'hour': '시간',
         'min': '분',
         'sec': '초'
@@ -82,9 +87,9 @@ var R = {
         'copyOk': 'The text copied to the clipboard.',
         'copyError': 'Unable to copy the text to the clipboard.',
         'notUrl': 'It is not a type of URL.',
-        'explPhone': 'Run the App or visit https://www.tool4.us when you want to receive or send simple text data with your phone.',
-        'explPC': 'Visit https://www.tool4.us in the PC or TV that you want to receive or send simple text data.',
-        'explTablet': 'Run the App or visit https://www.tool4.us when you want to receive or send simple text data with your tablet.',
+        'explPhone': 'Run the App or visit ' + R._getUrl() + ' when you want to receive or send simple text data with your phone.',
+        'explPC': 'Visit ' + R._getUrl() + ' in the PC or TV that you want to receive or send simple text data.',
+        'explTablet': 'Run the App or visit ' + R._getUrl() + ' when you want to receive or send simple text data with your tablet.',
         'hour': 'hour(s)',
         'min': 'minute(s)',
         'sec': 'second(s)'
@@ -102,13 +107,25 @@ var R = {
     if( 'recvExplain' == type ) {
       switch(R.locale) {
         case 'ko':
-          genText = '보낼 기기에서 <span class="w3-xlarge x-text-red">' + options + '</span>를 입력하거나,'
-            + '<br>QR 코드를 스캔하세요.';
+          if( isRunningOnBrowser() ) {
+            genText = '보낼 기기에서 <span class="w3-xlarge x-text-red">' + options + '</span>를 입력하거나,'
+              + '<br>QR 코드를 스캔하세요.';
+          } else {
+            genText = '보낼 기기에서 App을 실행하거나 혹은 ' + R._getUrl('/send') + '에 접속하여 '
+              + '<span class="w3-xlarge x-text-red">' + options + '</span>'
+              + '를 입력하세요.'
+          }
           break;
 
         default:
-          genText = 'With your sending device, enter ' + '<span class="w3-xlarge x-text-red">' + options + '</span>'
-            + ' in Authenticode, or scan the QR code above, please.';
+          if( isRunningOnBrowser ) {
+            genText = 'With your sending device, enter ' + '<span class="w3-xlarge x-text-red">' + options + '</span>'
+              + ' in Authenticode, or scan the QR code above, please.';
+          } else {
+            genText = 'Execute the App or browse ' + R._getUrl('/send') + ' in your sending device and enter '
+              + '<span class="w3-xlarge x-text-red">' + options + '</span>'
+              + ' in Authenticode.';
+          }
           break;
       }
     }

@@ -22,14 +22,27 @@ var recvMgr = {
   },
 
   onActivated: function(prevMgr, options) {
+    if( isValid2(recvMgr.countdownTimer) ) {
+      return;
+    }
+
     var hs = '';
 
     hs += '<div class="w3-container w3-large">'
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('remoteID') + '</div>'
       + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
-      + '<div id="idcode" class="w3-border w3-white" style="height:' + (codeSize + 20) + 'px; width:' + (codeSize + 20) + 'px; padding:10px; margin:auto;"></div>'
-      + '<div id="idtext" class="x-text-grey">&npsp;</div>'
-      + '<div id="idmsg" class="x-text-orange">' + R.text('remainTime') + ':</div>'
+      ;
+
+    if( isRunningOnBrowser() ) {
+      hs += '<div id="idcode" class="w3-border w3-white" style="height:' + (codeSize + 20) + 'px; width:' + (codeSize + 20) + 'px; padding:10px; margin:auto;"></div>'
+        + '<div id="idtext" class="x-text-grey">&nbsp;</div>'
+        ;
+    } else {
+      hs += '<div id="idtext" class="x-text-grey">&nbsp;</div>'
+        ;
+    }
+
+    hs += '<div id="idmsg" class="x-text-orange">' + R.text('remainTime') + ':</div>'
       + '</div></div>'
       + '<div class="w3-container w3-large">'
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('recvData') + '</div>'
@@ -49,7 +62,6 @@ var recvMgr = {
   },
 
   onDeactivated: function(activePage) {
-    Hermes.cleanUp();
     recvMgr.doneToWait();
   },
 
@@ -60,7 +72,11 @@ var recvMgr = {
     recvMgr.countdownTimer = undefined;
 
     $('#idmsg').empty().html(msg + '<br><a href="#" class="x-text-green" onclick="recvMgr.waitToReceive()">' + R.text('retry') + '</a>');
-    $('#idcode').empty().qrcode({'width':codeSize, 'height':codeSize, 'text':'0000'});
+
+    if( isRunningOnBrowser() ) {
+      $('#idcode').empty().qrcode({'width':codeSize, 'height':codeSize, 'text':'0000'});
+    }
+
     $('#idtext').html('&nbsp;');
   },
 
@@ -83,10 +99,12 @@ var recvMgr = {
       // connection ok
       function(connectionID) {
         // data: remoteID, proxyServer
-        $('#idcode').empty().qrcode({
-          'width':codeSize, 'height':codeSize,
-          'text':JSON.stringify({'version':'1', 'authCode':connectionID})
-        });
+        if( isRunningOnBrowser() ) {
+          $('#idcode').empty().qrcode({
+            'width':codeSize, 'height':codeSize,
+            'text':JSON.stringify({'version':'1', 'authCode':connectionID})
+          });
+        }
         $('#idtext').html(R.makeText('recvExplain', connectionID));
         $('#idmsg').text(recvMgr.makeRemainTime(remainLimit));
 
