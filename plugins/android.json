@@ -15,15 +15,9 @@
         },
         "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.tool4us.shareit"
-        },
-        "phonegap-plugin-barcodescanner": {
-            "PACKAGE_NAME": "com.tool4us.shareit"
         }
     },
     "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.tool4us.shareit"
-        },
         "cordova-plugin-shareit": {
             "PACKAGE_NAME": "com.tool4us.shareit"
         }

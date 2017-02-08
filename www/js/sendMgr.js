@@ -39,9 +39,10 @@ var sendMgr = {
       + '<button class="w3-btn w3-large" style="margin: 16px 5px 0 5px;" onclick="sendMgr.sendData();">' + R.text('actionSend') + '</button>'
       ;
 
+    /*
     if( !isRunningOnBrowser() ) {
       hs += '<button class="w3-btn" style="margin: 16px 5px 0 5px;" onclick="sendMgr.scanCode();">' + R.text('actionScan') + '</button>';
-    }
+    } // */
     hs += '</div></div>';
 
     this.board.html(hs);
@@ -101,8 +102,9 @@ var sendMgr = {
         }
       }
     );
-  },
+  }
 
+  /*
   scanCode: function() {
     var textData = $('#dataSent').val();
 
@@ -139,5 +141,5 @@ var sendMgr = {
         // orientation : 'portrait', // Android only (portrait|landscape), default unset so it rotates with the device
         disableAnimations : true // iOS
       });
-  }
+  } // */
 };
