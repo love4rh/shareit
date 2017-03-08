@@ -22,6 +22,7 @@ var recvMgr = {
   },
 
   onActivated: function(prevMgr, options) {
+    // TODO waiting
     if( isValid2(recvMgr.countdownTimer) ) {
       return;
     }

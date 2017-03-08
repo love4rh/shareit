@@ -8,6 +8,7 @@ platforms/
 backup/
 site-release/
 etc/
+plugins/
 
 # Built application files
 *.apk

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.tool4us.shareit" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ShareIt</name>
+<widget id="com.tool4us.shareit" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>SHERIT</name>
     <description>
-        A simple application that share simple text data between deivces.
+        A simple application that send or receive simple text data between deivces.
     </description>
-    <author email="toolet4us@gmail.com" href="http://www.tool4.us">
+    <author email="toolet4us@gmail.com" href="https://www.tool4.us">
         Tool4Us
     </author>
     <content src="app.html" />

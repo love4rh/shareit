@@ -18,6 +18,7 @@ var app = {
 
   onDeviceReady: function() {
     console.log('device is ready to use on ' + device.platform + '. language: ' + navigator.language);
+
     app.initialize();
   },
 
@@ -70,6 +71,7 @@ var app = {
 
   adjustLayout: function() {
     const appHeaderHeight = 50;
+    const adHeight = 60;
 
     var w = $(window).width();
     var h = $(window).height();
@@ -78,7 +80,7 @@ var app = {
 
     place(app.appBoard, undefined, undefined, w, h);
     place(app.header, undefined, undefined, w, appHeaderHeight);
-    place(app.pageBoard, undefined, undefined, w, h - appHeaderHeight);
+    place(app.pageBoard, undefined, undefined, w, h - appHeaderHeight - adHeight);
     // place(app.pageBoard.find('.x-main-view'), undefined, undefined, w, h - appHeaderHeight);
 
     app.pageBoard.css({'position':'relative', 'top':appHeaderHeight + cUnit});
@@ -106,6 +108,8 @@ var app = {
         window.plugins.shareit.clearText();
       });
     }
+
+    setTimeout(function() { showADBanner(); }, 20);
   },
 
   onBackKeyDown: function(event) {
@@ -168,6 +172,8 @@ var app = {
     }
 
     app.currentPageMgr = newMgr;
+
+    setTimeout(function() { showADBanner(); }, 20);
   },
 
   switchHeader: function(pageMgr) {

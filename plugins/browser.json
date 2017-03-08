@@ -15,6 +15,9 @@
         },
         "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.tool4us.shareit"
+        },
+        "cordova-plugin-admob-simple": {
+            "PACKAGE_NAME": "com.tool4us.shareit"
         }
     },
     "dependent_plugins": {
@@ -22,6 +25,9 @@
             "PACKAGE_NAME": "com.tool4us.shareit"
         },
         "cordova-plugin-shareit": {
+            "PACKAGE_NAME": "com.tool4us.shareit"
+        },
+        "cordova-admob-sdklibs": {
             "PACKAGE_NAME": "com.tool4us.shareit"
         }
     }
