@@ -1,4 +1,4 @@
-package com.tool4us.shareit;
+package com.tool4us.texender;
 
 import android.app.Activity;
 import android.content.Intent;
