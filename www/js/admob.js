@@ -41,6 +41,17 @@ var admob = {
     admob.initialized = true;
   },
 
+  // https://firebase.google.com/docs/admob/android/banner?hl=ko
+  getBannerHeight: function() {
+    var h = 90;
+    var w = $(window).width();
+
+    if( w <= 400 ) { h = 32; }
+    else if( w <= 720 ) { h = 50; }
+
+    return h;
+  },
+
   //functions to allow you to know when ads are shown, etc.
   registerAdEvents: function() {
     document.addEventListener('onReceiveAd', function(){ console.log('onReceiveAd'); });

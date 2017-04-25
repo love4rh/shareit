@@ -1,4 +1,5 @@
 var R = {
+  textLimit: 16384, // text size limit (16KB)
   locale: 'ko',
   langPack: {},
   siteUrl: 'https://www.tool4.us',
@@ -18,9 +19,10 @@ var R = {
 
     if( 'ko' == locale ) {
       R.langPack = {
-        'appTitle': 'SHERIT',
+        'appTitle': '텍스센더',
         'recvPage': '받기',
         'sendPage': '보내기',
+        'historyPage': '히스토리',
         'remoteID': '인증코드',
         'recvData': '받은 데이터',
         'sentData': '보낼 데이터',
@@ -51,15 +53,17 @@ var R = {
         'explPhone': '스마트폰에서 데이터를 보내거나 받으려면, App을 실행하거나 ' +  R._getUrl() + '에 접속하세요.',
         'explPC': 'TV나 PC에서 보내거나 받으려면 ' + R._getUrl() + '에 접속하세요.',
         'explTablet': '태플릿에서 데이터를 보내거나 받으려면, App을 실행하거나 ' + R._getUrl() + '에 접속하세요.',
+        'exceedLimit': '보낼 수 있는 용량(16KB)을 초과하였습니다.',
         'hour': '시간',
         'min': '분',
         'sec': '초'
       };
     } else {
       R.langPack = {
-        'appTitle': 'SHERIT',
+        'appTitle': 'TEXENDER',
         'recvPage': 'Receive',
         'sendPage': 'Send',
+        'historyPage': 'History',
         'remoteID': 'Authenticode',
         'recvData': 'Text Received',
         'sentData': 'Text To Be Sent',
@@ -90,6 +94,7 @@ var R = {
         'explPhone': 'Run the App or visit ' + R._getUrl() + ' when you want to receive or send simple text data with your phone.',
         'explPC': 'Visit ' + R._getUrl() + ' in the PC or TV that you want to receive or send simple text data.',
         'explTablet': 'Run the App or visit ' + R._getUrl() + ' when you want to receive or send simple text data with your tablet.',
+        'exceedLimit': 'The size of data exceeds limit(16KB).',
         'hour': 'hour(s)',
         'min': 'minute(s)',
         'sec': 'second(s)'

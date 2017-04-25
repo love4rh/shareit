@@ -8,6 +8,10 @@ const remainLimit = 300;  // 5min
 var runningOnBrowser = true;
 
 
+function tickCount() {
+  return (new Date()).getTime();
+}
+
 function isValid(obj) {
   return obj != undefined && obj != null;
 }
@@ -69,4 +73,20 @@ var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]
 
 function isValidUrl(str) {
   return urlPattern.test(str);
+}
+
+function byteLength(str) {
+  if( !isValid2(str) ) return 0;
+
+  var l = 0;
+
+  for(var idx = 0; idx < str.length; ++idx) {
+    var c = escape(str.charAt(idx));
+
+    if( c.length == 1 ) l += 1;
+    else if( c.indexOf('%u') != -1 ) l += 2;
+    else if( c.indexOf('%') != -1 ) l += c.length / 3;
+  }
+
+  return l;
 }

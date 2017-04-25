@@ -36,11 +36,9 @@ var recvMgr = {
 
     if( isRunningOnBrowser() ) {
       hs += '<div id="idcode" class="w3-border w3-white" style="height:' + (codeSize + 20) + 'px; width:' + (codeSize + 20) + 'px; padding:10px; margin:auto;"></div>'
-        + '<div id="idtext" class="x-text-grey">&nbsp;</div>'
-        ;
+        + '<div id="idtext" class="x-text-grey">&nbsp;</div>';
     } else {
-      hs += '<div id="idtext" class="x-text-grey">&nbsp;</div>'
-        ;
+      hs += '<div id="idtext" class="x-text-grey">&nbsp;</div>';
     }
 
     hs += '<div id="idmsg" class="x-text-orange">' + R.text('remainTime') + ':</div>'
@@ -48,7 +46,7 @@ var recvMgr = {
       + '<div class="w3-container w3-large">'
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('recvData') + '</div>'
       + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
-      + '<textarea id="recvData" class="w3-input x-theme-textpanel" style="width:100%;" rows="3" disabled></textarea>'
+      + '<textarea id="recvData" class="w3-input x-theme-textpanel" style="width:100%;" rows="3"></textarea>'
       + '<button class="w3-btn x-btn-copy" style="margin: 16px 5px 0 5px;">' + R.text('actionCopy') + '</button>'
       + '<button class="w3-btn x-btn-redirect" style="margin: 16px 5px 0 5px;">' + R.text('actionRedirect') + '</button>'
       + '</div></div>'
@@ -132,8 +130,10 @@ var recvMgr = {
           var recvObj = JSON.parse(data);
 
           nextAction = recvObj['dataType'];
-          recvText = recvObj['text'];
+          recvText = decodeURI(recvObj['text']);
           reserve = recvObj['aa'];
+
+          rsHistory.add(recvText, true);
         } catch(err) {
           console.log(err);
         }
@@ -175,6 +175,7 @@ var recvMgr = {
         showToast(R.text('copyError'));
       }
     } catch (err) {
+      console.log(err);
       showToast(R.text('copyError'));
     }
     outDiv.attr('disabled', true);

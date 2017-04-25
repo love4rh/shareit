@@ -19,34 +19,26 @@ var sendMgr = {
 
     if( options && options['text'] ) { textSent = options['text']; }
 
-    console.log(options);
-
     hs += '<div class="w3-container w3-large">'
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('sentData') + '</div>'
       + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
       + '<textarea id="dataSent" class="w3-input x-theme-textpanel" style="width:100%;" rows="3" val=""></textarea>'
-      + '<div class="w3-left" style="margin-top: 10px;">'
+      /* + '<div class="w3-left" style="margin-top: 10px;">'
       + '<input class="w3-radio" type="radio" name="dataType" value="normal" checked>'
       + '<label class="w3-validate"> ' + R.text('typeNormal') + '</label><span>&nbsp;&nbsp;</span>'
       + '<input class="w3-radio" type="radio" name="dataType" value="url">'
       + '<label class="w3-validate"> ' + R.text('typeUrl') + '</label>'
-      + '</div>'
+      + '</div>' // */
       + '</div></div>'
       + '<div class="w3-container w3-large">'
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('remoteID') + '</div>'
       + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
       + '<input id="authCode" type="number" class="w3-input x-theme-textpanel" style="width:100%;" placeholder="' + R.text('enterCode') + '">'
       + '<button class="w3-btn w3-large" style="margin: 16px 5px 0 5px;" onclick="sendMgr.sendData();">' + R.text('actionSend') + '</button>'
-      ;
-
-    /*
-    if( !isRunningOnBrowser() ) {
-      hs += '<button class="w3-btn" style="margin: 16px 5px 0 5px;" onclick="sendMgr.scanCode();">' + R.text('actionScan') + '</button>';
-    } // */
-    hs += '</div></div>';
+      + '</div></div>';
 
     this.board.html(hs);
-    this.board.find('#dataSent').off('change').on('change', this.onDataChanged);
+    // this.board.find('#dataSent').off('change').on('change', this.onDataChanged);
 
     if( isValid2(textSent) ) {
       console.log('set: ' + textSent);
@@ -80,17 +72,25 @@ var sendMgr = {
       return;
     }
 
+    if( byteLength(textData) > R.textLimit ) {
+      showToast( R.text('exceedLimit') );
+      return;
+    }
+
     if( !isValid2(authCode) ) {
       showToast( R.text('missAuth') );
       return;
     }
 
-    var dataType = sendMgr.board.find(':radio[name="dataType"]:checked').val();
-    var sentObj = { 'dataType':dataType, 'text':textData };
+    // var dataType = sendMgr.board.find(':radio[name="dataType"]:checked').val();
+    var dataType = 'normal';
+    var sentText = encodeURIComponent(textData);
+    var sentObj = { 'dataType':dataType, 'text':sentText };
 
     Hermes.sendToRemote(hmUrl, authCode, JSON.stringify(sentObj),
       // success data
       function() {
+        rsHistory.add(sentText, false);
         showToast(R.text('sendSuccess'));
       },
       // error occurred

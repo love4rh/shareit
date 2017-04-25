@@ -17,7 +17,7 @@ var app = {
   },
 
   isAdShown: function() {
-    return false;
+    return !isRunningOnBrowser() && isValid(window.plugins.AdMob);
   },
 
   onDeviceReady: function() {
@@ -38,15 +38,18 @@ var app = {
     app.header.find('li:nth-child(2)').html('<span>' + R.text('appTitle') + '<span>');
 
     // TODO when you need to add a new page, edit following codes.
-    app.addPage(pageMain);
-    app.addPage(recvMgr);
-    app.addPage(sendMgr);
+    var pages = [pageMain, recvMgr, sendMgr, historyPage];
+
+    var clickFunc = function(p) { return function(){ app.showPage(p); } };
+    for(var i = 1; i <= pages.length; ++i) {
+      var m = pages[i - 1];
+
+      app.addPage(m);
+
+      $('#mm' + i).on('click', clickFunc(m)).html(m.getHeaderInfo().title);
+    }
 
     app.showPage(pageMain);
-
-    $('#mm1').on('click', function(){ app.showPage(pageMain); }).html(R.text('appTitle'));
-    $('#mm2').on('click', function(){ app.showPage(recvMgr);  }).html(R.text('recvPage'));
-    $('#mm3').on('click', function(){ app.showPage(sendMgr);  }).html(R.text('sendPage'));
 
     if( !isRunningOnBrowser() && window.plugins && window.plugins.shareit ) {
       window.plugins.shareit.getRecvText(function(data) {
@@ -75,9 +78,7 @@ var app = {
 
   adjustLayout: function() {
     var appHeaderHeight = 50;
-    var adDiv = $('#appAd');
-    var adOn = adDiv && adDiv.length > 0;
-    var adHeight = adOn ? 50 : 0;
+    var adHeight = app.isAdShown() ? admob.getBannerHeight() : 0;
 
     var w = $(window).width();
     var h = $(window).height();
@@ -87,11 +88,6 @@ var app = {
     place(app.appBoard, undefined, undefined, w, h);
     place(app.header, undefined, undefined, w, appHeaderHeight);
     place(app.pageBoard, undefined, undefined, w, h - appHeaderHeight - adHeight);
-    // place(app.pageBoard.find('.x-main-view'), undefined, undefined, w, h - appHeaderHeight);
-
-    if( adOn ) {
-      place(adDiv, undefined, undefined, w, adHeight);
-    }
 
     app.pageBoard.css({'position':'relative', 'top':appHeaderHeight + cUnit});
 
@@ -103,7 +99,7 @@ var app = {
   },
 
   onPause: function(event) {
-    //
+    rsHistory.store();
   },
 
   onResume: function(event) {
@@ -194,7 +190,7 @@ var app = {
     var hi = pageMgr.getHeaderInfo();
 
     if( hi['mainButton'] == 'back' ) {
-      app.header.find('li:nth-child(1)').html('<a href="javascipt:void(0);"><i class="fa fa-arrow-left"></i></a>').off('click').on('click', app.clickMainMenu);
+      app.header.find('li:nth-child(1)').html('<a href="#"><i class="fa fa-arrow-left"></i></a>').off('click').on('click', app.clickMainMenu);
       app.mainMenuAsGoBack = true;
     } else {
       app.header.find('li:nth-child(1)').html('<img src="./img/logo.png" style="width:24px; height:24px; margin:13px 10px;">').off('click').on('click', app.clickMainMenu);

@@ -22,6 +22,7 @@ var pageMain = {
     var hs = '<div class="w3-container w3-center" style="margin-top: 24px;">'
       + '<button class="w3-btn w3-teal w3-round-xlarge w3-large w3-padding-medium x-receive" style="width:100%; margin:12px auto;"><i class="fa fa-cloud-download"></i> ' + R.text('recvPage') + '</button>'
       + '<button class="w3-btn w3-khaki w3-round-xlarge w3-large w3-padding-medium x-send" style="width:100%; margin:12px auto;"><i class="fa fa-cloud-upload"></i> ' + R.text('sendPage') + '</button>'
+      + '<button class="w3-btn w3-brown w3-round-xlarge w3-large w3-padding-medium x-history" style="width:100%; margin:12px auto;"><i class="fa fa-history"></i> ' + R.text('historyPage') + '</button>'
       + '</div>'
       + '<div class="w3-container w3-center" style="padding: 20px;">'
       + '<table>'
@@ -39,6 +40,7 @@ var pageMain = {
 
     pageMain.board.find('.x-receive').off('click').on('click', function(){ app.showPage(recvMgr) });
     pageMain.board.find('.x-send').off('click').on('click', function(){ app.showPage(sendMgr) });
+    pageMain.board.find('.x-history').off('click').on('click', function(){ app.showPage(historyPage) });
 
     pageMain.displayed = true;
 
