@@ -20,6 +20,25 @@ function isValid2(val) {
   return val != '' && isValid(val);
 }
 
+function nvl(val, def) {
+  return isValid(val) ? val : def;
+}
+
+function isShown(elem) {
+  return elem.css('display') != 'none';
+}
+
+function paddingZero(n) {
+  return n < 10 ? '0' + n : n;
+}
+
+function dateStrByTick(tick) {
+  var d = new Date(tick);
+
+  return d.getFullYear() + '-' + paddingZero(d.getMonth() + 1) + '-' + paddingZero(d.getDate())
+    + ' ' + paddingZero(d.getHours()) + ':' + paddingZero(d.getMinutes());
+}
+
 function place(obj, l, t, w, h) {
   if( obj == undefined ) { return; }
 
@@ -62,7 +81,7 @@ function showToast(msg) {
         textColor: '#FFFFFF', // Ditto. Default #FFFFFF
         cornerRadius: 100, // minimum is 0 (square). iOS default 20, Android default 100
         horizontalPadding: 50, // iOS default 16, Android default 50
-        verticalPadding: 30, // iOS default 12, Android default 30
+        verticalPadding: 50, // iOS default 12, Android default 30
         textSize: 15 // Default is approx. 13.
       }
     });

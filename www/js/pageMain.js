@@ -3,52 +3,66 @@
 var pageMain = {
   board: undefined,
   displayed: false,
+  fullMode: true, // no header mode
 
   initialize: function(board) {
     this.board = board;
+    // this.fullMode = !isRunningOnBrowser();
   },
 
   getPageID: function() { return 'pageMain'; },
 
   getHeaderInfo: function() {
-    return {'title':R.text('appTitle'), 'mainButton':'normal'};
+    return { 'title':R.text('appTitle'), 'mainButton':'normal', 'fullMode':false, // this.fullMode,
+      'headerHtml': '<img src="./img/logo.png" style="width:24px; height:24px;">' };
   },
 
   isMainContent: function() { return true; },
 
   onActivated: function(prevMgr, options) {
-    if( pageMain.displayed ) { return; }
+    var me = pageMain;
 
-    var hs = '<div class="w3-container w3-center" style="margin-top: 24px;">'
-      + '<button class="w3-btn w3-teal w3-round-xlarge w3-large w3-padding-medium x-receive" style="width:100%; margin:12px auto;"><i class="fa fa-cloud-download"></i> ' + R.text('recvPage') + '</button>'
-      + '<button class="w3-btn w3-khaki w3-round-xlarge w3-large w3-padding-medium x-send" style="width:100%; margin:12px auto;"><i class="fa fa-cloud-upload"></i> ' + R.text('sendPage') + '</button>'
-      + '<button class="w3-btn w3-brown w3-round-xlarge w3-large w3-padding-medium x-history" style="width:100%; margin:12px auto;"><i class="fa fa-history"></i> ' + R.text('historyPage') + '</button>'
-      + '</div>'
-      + '<div class="w3-container w3-center" style="padding: 20px;">'
-      + '<table>'
-      + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/cellphone.png"></td>'
-      + '<td style="padding:5px; text-align:left;">' + R.text('explPhone') + '</td></tr>'
-      + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/pc.png"></td>'
-      + '<td style="padding:5px; text-align:left;">' + R.text('explPC') + '</td></tr>'
-      + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/tablet.png"></td>'
-      + '<td style="padding:5px; text-align:left;">' + R.text('explTablet') + '</td></tr>'
-      + '</table>'
-      + '</div>'
+    if( me.displayed ) { return; }
+
+    var hs, bs;
+
+    bs = '<button class="w3-btn w3-teal w3-round-xlarge w3-large w3-padding-medium x-receive"><i class="fa fa-cloud-download"></i> ' + R.text('recvPage') + '</button>'
+      + '<button class="w3-btn w3-khaki w3-round-xlarge w3-large w3-padding-medium x-send"><i class="fa fa-cloud-upload"></i> ' + R.text('sendPage') + '</button>'
+      + '<button class="w3-btn w3-brown w3-round-xlarge w3-large w3-padding-medium x-history"><i class="fa fa-history"></i> ' + R.text('historyPage') + '</button>'
       ;
 
-    pageMain.board.html(hs);
+    if( me.fullMode ) {
+      hs ='<div class="w3-container w3-center x-jumbotron">'
+        + '<div class="w3-display-middle">'
+        + '<img src="./img/logo.png" style="width:100px; height:100px;">'
+        + '</div>'
+        + '</div>'
+        + '<div class="w3-container w3-center" style="margin-top: 16px;">' + bs + '</div>';
+    } else {
+      hs = + '<div class="w3-container w3-center" style="margin-top: 24px;">' + bs + '</div>';
+        + '<div class="w3-container w3-center" style="padding: 20px;">'
+        + '<table>'
+        + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/cellphone.png"></td>'
+        + '<td style="padding:5px; text-align:left;">' + R.text('explPhone') + '</td></tr>'
+        + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/pc.png"></td>'
+        + '<td style="padding:5px; text-align:left;">' + R.text('explPC') + '</td></tr>'
+        + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/tablet.png"></td>'
+        + '<td style="padding:5px; text-align:left;">' + R.text('explTablet') + '</td></tr>'
+        + '</table>'
+        + '</div>';
+    }
 
-    pageMain.board.find('.x-receive').off('click').on('click', function(){ app.showPage(recvMgr) });
-    pageMain.board.find('.x-send').off('click').on('click', function(){ app.showPage(sendMgr) });
-    pageMain.board.find('.x-history').off('click').on('click', function(){ app.showPage(historyPage) });
+    me.board.html(hs);
 
-    pageMain.displayed = true;
+    me.board.find('.x-receive').off('click').on('click', function(){ app.showPage(recvMgr) });
+    me.board.find('.x-send').off('click').on('click', function(){ app.showPage(sendMgr) });
+    me.board.find('.x-history').off('click').on('click', function(){ app.showPage(historyPage) });
 
-    app.adjustLayout();
+    me.displayed = true;
   },
 
   adjustLayout: function(w, h) {
-    pageMain.board.find('#titleImg').css({'width': Math.min(w - 40, 630) + cUnit});
+    place(pageMain.board.find('.x-jumbotron'), undefined, undefined, w, 240);
   },
 
   onDeactivated: function(activePage) {

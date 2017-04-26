@@ -2,6 +2,7 @@
 
 var sendMgr = {
   board: undefined,
+  addHistory: true,
 
   initialize: function(board) {
     this.board = board;
@@ -17,7 +18,10 @@ var sendMgr = {
     var hs = '';
     var textSent = '';
 
-    if( options && options['text'] ) { textSent = options['text']; }
+    if( options ) {
+      textSent = nvl(options['text'], '');
+      this.addHistory = nvl(options['history'], true);
+    }
 
     hs += '<div class="w3-container w3-large">'
       + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('sentData') + '</div>'
@@ -53,6 +57,8 @@ var sendMgr = {
   onDataChanged: function(event) {
     var textData = $('#dataSent').val();
     if( !isValid2(textData) ) { return; }
+
+    sendMgr.addHistory = true;
 
     sendMgr.board.find(':radio[name="dataType"]').removeAttr('checked');
 
@@ -90,7 +96,11 @@ var sendMgr = {
     Hermes.sendToRemote(hmUrl, authCode, JSON.stringify(sentObj),
       // success data
       function() {
-        rsHistory.add(sentText, false);
+        if( sendMgr.addHistory ) {
+          rsHistory.add(sentText, false);
+          sendMgr.addHistory = false;
+        }
+
         showToast(R.text('sendSuccess'));
       },
       // error occurred

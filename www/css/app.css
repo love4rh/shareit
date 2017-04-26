@@ -21,7 +21,11 @@
 }
 
 body {
-
+  background-color: #20272b;
+  background-image: url('../img/logo.png');
+  background-size: 96px 96px;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 textarea { resize: none; }
@@ -91,9 +95,13 @@ textarea { resize: none; }
 .x-text-blue   { color: #4fafef; }
 .x-text-red    { color: #e06262; }
 .x-text-green  { color: #98c379; }
+.x-text-sky    { color: #00bcd4; }
+.x-text-yellow { color: #cddc39; }
+.x-text-white  { color: #ffffff; }
 
-.x-receive, .x-send {
-  margin: 12px 16px 4px 16px;
+.x-receive, .x-send, .x-history {
+  margin: 12px auto;
+  width: 100%;
 }
 
 .x-expl-icon {
@@ -104,4 +112,43 @@ textarea { resize: none; }
 .x-url {
   color: #c678bd;
   text-decoration: underline;
+}
+
+.x-jumbotron {
+  background-color: #20272b;
+  position: relative;
+}
+
+.x-table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+
+.x-table td {
+  border-bottom: 1px solid #0e1419 !important;
+  padding: 5px;
+}
+
+.x-history-dir {
+  width: 60px;
+  height: 55px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.x-history-text {
+  height: 55px;
+  vertical-align: middle;
+}
+
+.x-history-time {
+  font-size: 12px;
+  color: #abb2bf;
+}
+
+.x-history-one-line {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  word-wrap:normal;
 }

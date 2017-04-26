@@ -9,6 +9,11 @@ var app = {
   wannaExit: false,
 
   begin: function() {
+    var w = $(window).width();
+    var h = $(window).height();
+
+    $('body').css({width:w, height:h});
+
     document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     document.addEventListener('pause', this.onPause, false);
     document.addEventListener('resume', this.onResume, false);
@@ -43,10 +48,14 @@ var app = {
     var clickFunc = function(p) { return function(){ app.showPage(p); } };
     for(var i = 1; i <= pages.length; ++i) {
       var m = pages[i - 1];
+      var hd = m.getHeaderInfo();
 
       app.addPage(m);
 
-      $('#mm' + i).on('click', clickFunc(m)).html(m.getHeaderInfo().title);
+      $('<li/>').addClass('w3-hide-small').append(
+        $('<a/>').addClass('w3-hover-none w3-hover-text-grey w3-padding-large')
+          .attr('href', '#').html(nvl(hd.headerHtml, hd.title)).on('click', clickFunc(m))
+      ).appendTo(app.header);
     }
 
     app.showPage(pageMain);
@@ -77,13 +86,15 @@ var app = {
   },
 
   adjustLayout: function() {
-    var appHeaderHeight = 50;
+    var appHeaderHeight = isShown(app.header) ? 50 : 0;
     var adHeight = app.isAdShown() ? admob.getBannerHeight() : 0;
 
     var w = $(window).width();
     var h = $(window).height();
 
     // TODO iOS: consider status bar height. adjust header top padding, header height.
+
+    $('body').css({width:w, height:h});
 
     place(app.appBoard, undefined, undefined, w, h);
     place(app.header, undefined, undefined, w, appHeaderHeight);
@@ -184,12 +195,14 @@ var app = {
     if( app.isAdShown() ) {
       setTimeout(function() { admob.showADBanner(); }, 20);
     }
+
+    app.adjustLayout();
   },
 
   switchHeader: function(pageMgr) {
-    var hi = pageMgr.getHeaderInfo();
+    var hd = pageMgr.getHeaderInfo();
 
-    if( hi['mainButton'] == 'back' ) {
+    if( hd['mainButton'] == 'back' ) {
       app.header.find('li:nth-child(1)').html('<a href="#"><i class="fa fa-arrow-left"></i></a>').off('click').on('click', app.clickMainMenu);
       app.mainMenuAsGoBack = true;
     } else {
@@ -197,7 +210,10 @@ var app = {
       app.mainMenuAsGoBack = false;
     }
 
-    app.header.find('li:nth-child(2)').html('<span>' + hi['title'] + '<span>');
+    app.header.find('li:nth-child(2)').html('<span>' + hd['title'] + '<span>');
+
+    // In case of using the full window
+    app.header.css('display', (nvl(hd['fullMode'], false) ? 'none' : 'block'));
   },
 
   goBack: function() {

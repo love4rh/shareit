@@ -8,11 +8,7 @@ var recvMgr = {
   initialize: function(board) {
     this.board = board;
 
-    if( isRunningOnBrowser() ) {
-      codeSize = 180;
-    } else {
-      codeSize = 140;
-    }
+    codeSize = isRunningOnBrowser() ? 180 : 140;
   },
 
   getPageID: function() { return 'recvMgr'; },
@@ -148,11 +144,13 @@ var recvMgr = {
           setTimeout(function() { window.open(recvText, 'sherit'); }, 500);
         }
 
+        /*
         if( reserve == 'continue') {
           recvMgr.countDown = remainLimit;
         } else {
           recvMgr.doneToWait(R.text('workDone'));
-        }
+        } // */
+        recvMgr.countDown = 180; // reset waiting time to 3 min for another message
       },
       // error occurred
       function(error) {
@@ -164,8 +162,6 @@ var recvMgr = {
   copyToClipboard: function(event) {
     var outDiv = $('#recvData');
 
-    // 선택하려는 텍스트가 disabled라면 선택이 되지 않음
-    outDiv.removeAttr('disabled');
     outDiv.select();
 
     try {
@@ -178,7 +174,6 @@ var recvMgr = {
       console.log(err);
       showToast(R.text('copyError'));
     }
-    outDiv.attr('disabled', true);
   },
 
   redirectUrl: function(event) {
