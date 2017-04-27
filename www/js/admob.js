@@ -1,5 +1,5 @@
 // Change to fit App & Account
-var adCode = 'ca-app-pub-123456789012/123421';
+var adCode = 'ca-app-pub-4175026002856799/4194720267';
 
 /**
  * AdMob plugin

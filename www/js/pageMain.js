@@ -62,7 +62,7 @@ var pageMain = {
   },
 
   adjustLayout: function(w, h) {
-    place(pageMain.board.find('.x-jumbotron'), undefined, undefined, w, 240);
+    place(pageMain.board.find('.x-jumbotron'), undefined, undefined, w, 200);
   },
 
   onDeactivated: function(activePage) {
