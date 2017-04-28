@@ -58,6 +58,25 @@ textarea { resize: none; }
   overflow-y: auto;
 }
 
+.x-title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.x-description {
+  color: #abb2bf;
+  font-size: 14px;
+}
+
+.x-authcode {
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+  padding: 7px auto;
+}
+
 .x-tab-title {
   width: 190px;
   text-align: left;
@@ -85,8 +104,13 @@ textarea { resize: none; }
 }
 
 .x-theme-textpanel {
-  background: #272822;
-  color: #fff;
+  background: #474d52;
+  color: #cddc39;
+}
+
+.x-code-textpanel {
+  background: #474d52;
+  color: #cddc39; /* #e06262; */
 }
 
 .x-text-purple { color: #c678bd; }
@@ -110,7 +134,7 @@ textarea { resize: none; }
 }
 
 .x-url {
-  color: #c678bd;
+  color: #c678bd!important;
   text-decoration: underline;
 }
 

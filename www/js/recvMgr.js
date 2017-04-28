@@ -26,26 +26,22 @@ var recvMgr = {
     var hs = '';
 
     hs += '<div class="w3-container w3-large">'
-      + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('remoteID') + '</div>'
-      + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
-      ;
+      + '<div class="x-title">' + R.text('remoteID') + '</div>'
+      + '<hr style="margin: 5px 0 !important;" />'
+      + '<div class="x-description">' + R.text('recvHelp') + '</div>'
+      + '<div id="authcode" class="x-authcode x-text-red">00000</div>'
+      + '<div id="idmsg" class="x-text-orange w3-center">' + R.text('remainTime') + '</div>'
+      + '</div>';
 
-    if( isRunningOnBrowser() ) {
-      hs += '<div id="idcode" class="w3-border w3-white" style="height:' + (codeSize + 20) + 'px; width:' + (codeSize + 20) + 'px; padding:10px; margin:auto;"></div>'
-        + '<div id="idtext" class="x-text-grey">&nbsp;</div>';
-    } else {
-      hs += '<div id="idtext" class="x-text-grey">&nbsp;</div>';
-    }
-
-    hs += '<div id="idmsg" class="x-text-orange">' + R.text('remainTime') + ':</div>'
-      + '</div></div>'
-      + '<div class="w3-container w3-large">'
-      + '<div class="x-theme-d1 x-tab-title x-tab-grad">' + R.text('recvData') + '</div>'
-      + '<div class="w3-container w3-center x-theme-panel x-panel" style="width:100%;">'
+    hs += '<div class="w3-container w3-large" style="margin-top: 24px;">'
+      + '<div class="x-title">' + R.text('recvData') + '</div>'
+      + '<hr style="margin: 5px 0 !important;" />'
       + '<textarea id="recvData" class="w3-input x-theme-textpanel" style="width:100%;" rows="3"></textarea>'
+      + '<div class="w3-center">'
       + '<button class="w3-btn x-btn-copy" style="margin: 16px 5px 0 5px;">' + R.text('actionCopy') + '</button>'
       + '<button class="w3-btn x-btn-redirect" style="margin: 16px 5px 0 5px;">' + R.text('actionRedirect') + '</button>'
-      + '</div></div>'
+      + '</div>'
+      + '</div>'
       ;
 
     this.board.html(hs);
@@ -66,13 +62,9 @@ var recvMgr = {
     if( recvMgr.countdownTimer ) { clearInterval(recvMgr.countdownTimer); }
     recvMgr.countdownTimer = undefined;
 
-    $('#idmsg').empty().html(msg + '<br><a href="#" class="x-text-green" onclick="recvMgr.waitToReceive()">' + R.text('retry') + '</a>');
-
-    if( isRunningOnBrowser() ) {
-      $('#idcode').empty().qrcode({'width':codeSize, 'height':codeSize, 'text':'0000'});
-    }
-
-    $('#idtext').html('&nbsp;');
+    $('#authcode').html('-----');
+    $('#idmsg').empty()
+      .html(msg + ' <a href="#" class="x-text-green" onclick="recvMgr.waitToReceive()">' + R.text('retry') + '</a>');
   },
 
   makeRemainTime: function(t) {
@@ -94,13 +86,7 @@ var recvMgr = {
       // connection ok
       function(connectionID) {
         // data: remoteID, proxyServer
-        if( isRunningOnBrowser() ) {
-          $('#idcode').empty().qrcode({
-            'width':codeSize, 'height':codeSize,
-            'text':JSON.stringify({'version':'1', 'authCode':connectionID})
-          });
-        }
-        $('#idtext').html(R.makeText('recvExplain', connectionID));
+        $('#authcode').html(connectionID);
         $('#idmsg').text(recvMgr.makeRemainTime(remainLimit));
 
         recvMgr.countDown = remainLimit;
@@ -129,7 +115,7 @@ var recvMgr = {
           recvText = decodeURI(recvObj['text']);
           reserve = recvObj['aa'];
 
-          rsHistory.add(recvText, true);
+          rsHistory.add(recvObj['text'], true);
         } catch(err) {
           console.log(err);
         }

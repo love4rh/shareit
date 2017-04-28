@@ -55,6 +55,9 @@ var R = {
         'explTablet': '태플릿에서 데이터를 보내거나 받으려면, App을 실행하거나 ' + R._getUrl() + '에 접속하세요.',
         'exceedLimit': '보낼 수 있는 용량(16KB)을 초과하였습니다.',
         'noHistory': '표시할 이력이 없습니다.',
+        'recvExpl': '사용법',
+        'recvHelp': '보낼 기기에서 App을 실행하거나 ' +  R._getUrl() + '에 접속하여 "보내기" 선택 후 인증코드를 입력하세요.',
+        'sendHelp': '받을 기기에서 App을 실행하거나 ' +  R._getUrl() + '에 접속하여 "받기" 선택 후 나타나는 인증코드를 입력하세요.',
         'hour': '시간',
         'min': '분',
         'sec': '초'
@@ -97,9 +100,12 @@ var R = {
         'explTablet': 'Run the App or visit ' + R._getUrl() + ' when you want to receive or send simple text data with your tablet.',
         'exceedLimit': 'The size of data exceeds limit(16KB).',
         'noHistory': 'No history of sending or receiving.',
+        'recvExpl': 'Instruction',
+        'recvHelp': 'With your sending device, run the App or visit ' +  R._getUrl() + ' and input the following authenticode in "Send" menu whithin remaining time.',
+        'sendHelp': 'With your sending device, run the App or visit ' +  R._getUrl() + ' and input the authenticode that is appeared in "Receive" menu.',
         'hour': 'hour(s)',
-        'min': 'minute(s)',
-        'sec': 'second(s)'
+        'min': 'min',
+        'sec': 'sec'
       };
     }
   },
