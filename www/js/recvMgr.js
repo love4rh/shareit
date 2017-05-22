@@ -112,7 +112,7 @@ var recvMgr = {
           var recvObj = JSON.parse(data);
 
           nextAction = recvObj['dataType'];
-          recvText = decodeURI(recvObj['text']);
+          recvText = decodeURIComponent(recvObj['text']);
           reserve = recvObj['aa'];
 
           rsHistory.add(recvObj['text'], true);

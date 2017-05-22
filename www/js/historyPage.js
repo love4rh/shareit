@@ -70,7 +70,7 @@ var historyPage = {
         + '</td>'
         + '<td class="x-history-text x-text-yellow">'
         + '<div class="x-history-time">' + dateStrByTick(obj.tick) + '</div>'
-        + '<div class="x-history-one-line">' + convertTagToNormal(decodeURI(obj.data)) + '</div>'
+        + '<div class="x-history-one-line">' + convertTagToNormal(decodeURIComponent(obj.data)) + '</div>'
         + '</td>'
         + '<td class="x-history-dir w3-xlarge">' + '<i class="x-text-green fa fa-share-square-o"></i>' + '</td>'
         + '</tr>';
@@ -101,6 +101,6 @@ var historyPage = {
     var tr = $(event.currentTarget);
     var obj = rsHistory.get(tr.attr('data-idx'));
 
-    app.showPage(sendMgr, {'text':decodeURI(obj.data), 'history':false});
+    app.showPage(sendMgr, {'text':decodeURIComponent(obj.data), 'history':false});
   }
 };

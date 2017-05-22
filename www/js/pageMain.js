@@ -7,13 +7,13 @@ var pageMain = {
 
   initialize: function(board) {
     this.board = board;
-    // this.fullMode = !isRunningOnBrowser();
+    this.fullMode = !isRunningOnBrowser();
   },
 
   getPageID: function() { return 'pageMain'; },
 
   getHeaderInfo: function() {
-    return { 'title':R.text('appTitle'), 'mainButton':'normal', 'fullMode':false, // this.fullMode,
+    return { 'title':R.text('appTitle'), 'mainButton':'normal', 'fullMode':this.fullMode,
       'headerHtml': '<img src="./img/logo.png" style="width:24px; height:24px;">' };
   },
 
@@ -39,7 +39,7 @@ var pageMain = {
         + '</div>'
         + '<div class="w3-container w3-center" style="margin-top: 16px;">' + bs + '</div>';
     } else {
-      hs = + '<div class="w3-container w3-center" style="margin-top: 24px;">' + bs + '</div>';
+      hs = '<div class="w3-container w3-center" style="margin-top: 24px;">' + bs + '</div>'
         + '<div class="w3-container w3-center" style="padding: 20px;">'
         + '<table>'
         + '<tr><td style="padding:5px;"><img class="x-expl-icon" src="./img/cellphone.png"></td>'
