@@ -45,7 +45,7 @@ var app = {
     // TODO when you need to add a new page, edit following codes.
     var pages = [pageMain, recvMgr, sendMgr, historyPage];
 
-    var clickFunc = function(p) { return function(){ app.showPage(p); } };
+    var clickFunc = function(p) { return function(){ app.showPage(p); }; };
     for(var i = 1; i <= pages.length; ++i) {
       var m = pages[i - 1];
       var hd = m.getHeaderInfo();
